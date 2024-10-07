@@ -4,7 +4,7 @@
 include "../connection.php";
 
 $email = $_POST["email"];
-$password = md5($_POST["password"]);
+$password = password_hash($_POST["password"], PASSWORD_DEFAULT); // 비밀번호 암호화
 $name = $_POST["name"];
 $nickName = $_POST["nickName"];
 $phoneNumber = $_POST["phoneNumber"];
