@@ -4,6 +4,7 @@
 include "../connection.php";
 
 $email = $_POST['email'];
+$content_id = $_POST['content_id'];
 $review_rate = $_POST['review_rate'];
 $review_content = $_POST['review_content'];
 
@@ -21,7 +22,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
 }
 
 // SQL 쿼리 작성: 이미지가 있는 경우와 없는 경우에 따라 쿼리를 달리 작성
-$sqlQuery = "INSERT INTO travel_review (email, review_rate, review_content, review_image) VALUES ('$email', '$review_rate', '$review_content', " . ($image_path ? "'$image_path'" : "NULL") . ")";
+$sqlQuery = "INSERT INTO travel_review (email, content_id, review_rate, review_content, review_image) VALUES ('$email', '$content_id', '$review_rate', '$review_content', " . ($image_path ? "'$image_path'" : "NULL") . ")";
 
 if ($con->query($sqlQuery) === TRUE) {
     echo json_encode([
