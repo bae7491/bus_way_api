@@ -3,10 +3,9 @@
 
 include "../connection.php";
 
-$email = $_POST['email'];
 $content_id = $_POST['content_id'];
 
-$sqlQuery = "SELECT COUNT(review_rate) as review_count, ROUND(AVG(review_rate), 1) as average_rate FROM travel_review WHERE email='$email' AND content_id='$content_id'";
+$sqlQuery = "SELECT COUNT(review_rate) as review_count, ROUND(AVG(review_rate), 1) as average_rate FROM travel_review WHERE content_id='$content_id'";
 
 $result = $con->query($sqlQuery);
 

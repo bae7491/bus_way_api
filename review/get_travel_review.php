@@ -5,7 +5,6 @@ include "../connection.php";
 
 $server_url = $_POST['server_url'];
 
-$email = $_POST['email'];
 $content_id = $_POST['content_id'];
 $pageNo = (int)$_POST['pageNo'];
 $pageSize = (int)$_POST['pageSize'];
@@ -15,7 +14,7 @@ $orderType = $_POST['sort'];
 $offset = ($pageNo - 1) * $pageSize;
 
 // 조건에 맞게 검색한 데이터 총 개수
-$totalCountQuery = "SELECT COUNT(*) as total_count FROM travel_review WHERE email = '$email' AND content_id = '$content_id'";
+$totalCountQuery = "SELECT COUNT(*) as total_count FROM travel_review WHERE content_id = '$content_id'";
 $totalCountResult = $con->query($totalCountQuery);
 $totalCount = 0;
 
@@ -28,7 +27,7 @@ if ($totalCountResult) {
 $orderCluase = $orderType === 'rate' ? 'ORDER BY review_rate DESC,modified_date DESC' : 'ORDER BY modified_date DESC';
 
 // 조건에 맞게 검색한 데이터
-$sqlQuery = "SELECT * FROM travel_review WHERE email = '$email' AND content_id = '$content_id' $orderCluase LIMIT $pageSize OFFSET $offset";
+$sqlQuery = "SELECT * FROM travel_review WHERE content_id = '$content_id' $orderCluase LIMIT $pageSize OFFSET $offset";
 
 $result = $con->query($sqlQuery);
 
