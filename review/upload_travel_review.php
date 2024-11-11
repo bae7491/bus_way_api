@@ -5,6 +5,7 @@ include "../connection.php";
 
 $email = $_POST['email'];
 $content_id = $_POST['content_id'];
+$title = $_POST['title'];
 $review_rate = $_POST['review_rate'];
 $review_content = $_POST['review_content'];
 
@@ -14,9 +15,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
     $imagePath = "../images/uploads/{$image}";
     $tmp_name = $_FILES['image']['tmp_name'];
 
-    move_uploaded_file($tmp_name, $imagePath) 
-    ? $image_path = $image 
-    : $image_path = null;
+    $image_path = $image;
 } else {
     $image_path = null;
 }
@@ -31,11 +30,15 @@ if ($nickNameResult && $nickNameResult->num_rows > 0) {
     $nickName = $row['nickName']; // 닉네임을 변수에 저장
 
     // 이미지가 있는 경우와 없는 경우에 따라 쿼리를 달리 작성
-    $sqlQuery = "INSERT INTO travel_review (email, nickName, content_id, review_rate, review_content, review_image) 
-                 VALUES ('$email', '$nickName', '$content_id', '$review_rate', '$review_content', " . ($image_path ? "'$image_path'" : "NULL") . ")";
+    $sqlQuery = "INSERT INTO travel_review (email, nickName, content_id,  title, review_rate, review_content, review_image) 
+                 VALUES ('$email', '$nickName', '$content_id', '$title', '$review_rate', '$review_content', " . ($image_path ? "'$image_path'" : "NULL") . ")";
     
     // INSERT 쿼리 실행
     if ($con->query($sqlQuery) === TRUE) {
+      move_uploaded_file($tmp_name, $imagePath) 
+        ? $image_path = $image 
+        : $image_path = null;
+
         echo json_encode([
             "success" => true,
             "message" => "리뷰 작성 성공!"
