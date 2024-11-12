@@ -46,7 +46,8 @@ if ($result) {
             "review_rate" => $row['review_rate'],
             "review_content" => $row['review_content'],
             "modified_date" => $row['modified_date'],
-            "review_image" => $reviewImage,
+            "review_image_path" => $reviewImage,
+            "review_image" => $row['review_image'],
         ];
   }
 

@@ -7,13 +7,15 @@ $reviewId = $_POST['review_id'];
 $reviewImage = $_POST['review_image']; // 이미지 이름
 
 // query문
-$sqlQuery = "DELETE FROM travel_review WHERE review_id = '$reviewId";
+$sqlQuery = "DELETE FROM travel_review WHERE review_id = '$reviewId'";
 
 $result = $con->query($sqlQuery);
 
 if ($result) {
-  unlink("{$server_url}/images/uploads/{$reviewImage}");
-  
+  if ($reviewImage != null) {
+    unlink("../images/uploads/{$reviewImage}");
+  }
+
   echo json_encode([
         "success" => true,
         "message" => "관광지 후기 삭제 성공!"

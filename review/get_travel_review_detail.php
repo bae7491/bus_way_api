@@ -24,7 +24,8 @@ if ($result) {
     "review_id" => $row['review_id'],
     "review_rate" => $row['review_rate'],
     "review_content" => $row['review_content'],
-    "review_image" => $reviewImage,
+    "review_image_path" => $reviewImage,
+    "review_image" => $row['review_image'],
   ]);
 } else {
   echo json_encode([
