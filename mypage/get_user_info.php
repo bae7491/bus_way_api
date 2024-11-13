@@ -16,6 +16,8 @@ if ($result) {
     "success" => true,
     "email" => $row['email'],
     "nickName" => $row['nickName'],
+    "name" => $row['name'],
+    "phoneNumber" => $row['phoneNumber'],
   ]);
 } else {
   echo json_encode([
